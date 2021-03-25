@@ -1,5 +1,7 @@
 import React from 'react';
 
+
+let mounted = true;
 class AppClass extends React.Component{
 
     state ={
@@ -8,6 +10,9 @@ class AppClass extends React.Component{
         x:null,
         y:null,
         status:navigator.onLine,
+        lat:null,
+        long:null,
+        speed:null
     }
 
     //after [render]
@@ -16,6 +21,8 @@ class AppClass extends React.Component{
         window.addEventListener('mousemove',this.handleMouseMove);
         window.addEventListener('online',this.handleOnline);
     window.addEventListener('offline',this.handleOffline);
+    navigator.geolocation.getCurrentPosition(this.handleGeoLocation);
+    const watchId=  navigator.geolocation.watchPosition(this.handleGeoLocation);
     }
 
     //after [every updates]
@@ -27,6 +34,9 @@ class AppClass extends React.Component{
         window.removeEventListener("mousemove",this.handleMouseMove);
         window.removeEventListener('online',this.handleOnline);
     window.removeEventListener('offline',this.handleOffline);
+    const watchId=  navigator.geolocation.watchPosition(this.handleGeoLocation);
+    navigator.geolocation.clearWatch(watchId);
+    mounted = false;
     }
 
     handleMouseMove = event =>{
@@ -58,6 +68,16 @@ class AppClass extends React.Component{
     this.setState({
         status:false
     });
+  }
+
+   handleGeoLocation = event => {
+    if(mounted){
+        this.setState({
+        lat:event.coords.latitude,
+        long:event.coords.longitude,
+        speed:event.coords.speed
+      })
+    } 
   }
 
 
@@ -99,6 +119,13 @@ class AppClass extends React.Component{
 
                     <h3>Network Status!</h3>
       <p>You are <strong>{this.state.status ? "online": "offline"}</strong></p>
+
+
+      <h3>Geo Location!</h3>
+      <p>Latitude is :: {this.state.lat}</p>
+      <p>Longitude is :: {this.state.long}</p>
+      <p>Your speed is :: {this.state.speed ? this.state.speed : "0"}</p>
+      
             </div>
         )
     }

@@ -10,6 +10,12 @@ import React , {useState, useEffect} from 'react';
 //   );
 // }
 
+const initialLocationState = {
+  lat:null,
+  long:null,
+  speed:null
+}
+
 const  AppFunc = ()  => {
 
   //pass init state [0] to useState() it will treturn [1.current state (count)& 2.another funtion (setIncrementCount) to update this value]
@@ -21,19 +27,27 @@ const  AppFunc = ()  => {
 
   const [status,setStatus] = useState(navigator.onLine) // init value coming from external API
 
+  const [{lat,long,speed},setLocation] =useState(initialLocationState);
+
+  let mounted = true;
   useEffect(() => {
     document.title = `Function clicked ${count} times`;
     window.addEventListener('mousemove',handleMouseMove);
     window.addEventListener('online',handleOnline);
     window.addEventListener('offline',handleOffline);
+    navigator.geolocation.getCurrentPosition(handleGeoLocation);
+   const watchId=  navigator.geolocation.watchPosition(handleGeoLocation);
 
     //before the useEffect runs
     return() =>{
       window.removeEventListener('mousemove',handleMouseMove);
       window.removeEventListener('online',handleOnline);
     window.removeEventListener('offline',handleOffline);
+    navigator.geolocation.clearWatch(watchId);
+    mounted = false;
     }
-  },[count]); //[conut ] => means count in title should not affect
+  },
+  [count]); //[conut ] => means count in title should not affect
 
  const  incrementCount = () => { 
   // setIncrementCount(count+1);
@@ -56,6 +70,16 @@ const handleMouseMove = event =>{
     x:event.pageX,
     y:event.pageY
   })
+}
+
+const handleGeoLocation = event => {
+  if(mounted){
+    setLocation({
+      lat:event.coords.latitude,
+      long:event.coords.longitude,
+      speed:event.coords.speed
+    })
+  } 
 }
 
   return (
@@ -99,7 +123,12 @@ const handleMouseMove = event =>{
 
       <h3>Network Status!</h3>
       <p>You are <strong>{status ? "online": "offline"}</strong></p>
-   
+
+      
+      <h3>Geo Location!</h3>
+      <p>Latitude is :: {lat}</p>
+      <p>Longitude is :: {long}</p>
+      <p>Your speed is :: {speed ? speed : "0"}</p>
 
 
     </div>
