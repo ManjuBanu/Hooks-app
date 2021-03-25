@@ -6,13 +6,16 @@ class AppClass extends React.Component{
         count :0, //init
         isOn:false,
         x:null,
-        y:null
+        y:null,
+        status:navigator.onLine,
     }
 
     //after [render]
     componentDidMount(){
         document.title = `Class clicked ${this.state.count} times`;
-        window.addEventListener('mousemove',this.handleMouseMove)
+        window.addEventListener('mousemove',this.handleMouseMove);
+        window.addEventListener('online',this.handleOnline);
+    window.addEventListener('offline',this.handleOffline);
     }
 
     //after [every updates]
@@ -21,7 +24,9 @@ class AppClass extends React.Component{
     }
 
     componentWillUnmount(){
-        window.removeEventListener("mousemove",this.handleMouseMove)
+        window.removeEventListener("mousemove",this.handleMouseMove);
+        window.removeEventListener('online',this.handleOnline);
+    window.removeEventListener('offline',this.handleOffline);
     }
 
     handleMouseMove = event =>{
@@ -43,6 +48,17 @@ class AppClass extends React.Component{
         }))
     }
 
+
+ handleOnline = () =>{
+    this.setState({
+        status:true
+    });
+  }
+   handleOffline = () =>{
+    this.setState({
+        status:false
+    });
+  }
 
 
     render(){
@@ -81,7 +97,8 @@ class AppClass extends React.Component{
                     <p>X Position: {this.state.x} </p>
                     <p>Y Position: {this.state.y} </p>
 
-
+                    <h3>Network Status!</h3>
+      <p>You are <strong>{this.state.status ? "online": "offline"}</strong></p>
             </div>
         )
     }

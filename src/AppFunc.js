@@ -17,17 +17,23 @@ const  AppFunc = ()  => {
 
   const [isOn , setIsOn] = useState(false);
 
-  const [mousePosition, setMousePosition] = useState({x:null, y:null})
+  const [mousePosition, setMousePosition] = useState({x:null, y:null});
+
+  const [status,setStatus] = useState(navigator.onLine) // init value coming from external API
 
   useEffect(() => {
     document.title = `Function clicked ${count} times`;
     window.addEventListener('mousemove',handleMouseMove);
+    window.addEventListener('online',handleOnline);
+    window.addEventListener('offline',handleOffline);
 
     //before the useEffect runs
     return() =>{
       window.removeEventListener('mousemove',handleMouseMove);
+      window.removeEventListener('online',handleOnline);
+    window.removeEventListener('offline',handleOffline);
     }
-  },[count]);
+  },[count]); //[conut ] => means count in title should not affect
 
  const  incrementCount = () => { 
   // setIncrementCount(count+1);
@@ -38,13 +44,19 @@ const toggleLight = () =>{
   setIsOn(prevIsOn => !prevIsOn )
 }
 
+const handleOnline = () =>{
+  setStatus(true);
+}
+const handleOffline = () =>{
+  setStatus(false)
+}
+
 const handleMouseMove = event =>{
   setMousePosition({
     x:event.pageX,
     y:event.pageY
   })
 }
-
 
   return (
     <div   style={{
@@ -84,6 +96,10 @@ const handleMouseMove = event =>{
       <h3>Mouse Position!</h3>
       {JSON.stringify( mousePosition , null, 2)}
       <br/>
+
+      <h3>Network Status!</h3>
+      <p>You are <strong>{status ? "online": "offline"}</strong></p>
+   
 
 
     </div>
