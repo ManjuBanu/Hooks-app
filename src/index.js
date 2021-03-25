@@ -3,11 +3,15 @@ import ReactDOM from 'react-dom';
 import AppClass from './AppClass';
 import AppFunc from './AppFunc';
 import reportWebVitals from './reportWebVitals';
+import Login from './login';
+import Register from './Register';
 
 ReactDOM.render(
   <React.StrictMode>
     <AppClass />
     <AppFunc/>
+    <Register/>
+    <Login/>
   </React.StrictMode>,
   document.getElementById('root')
 );
