@@ -1,4 +1,4 @@
-import React , {useState} from 'react';
+import React , {useState, useEffect} from 'react';
 
 
 /** [default create-react-app] */
@@ -17,6 +17,17 @@ const  AppFunc = ()  => {
 
   const [isOn , setIsOn] = useState(false);
 
+  const [mousePosition, setMousePosition] = useState({x:null, y:null})
+
+  useEffect(() => {
+    document.title = `Function clicked ${count} times`;
+    window.addEventListener('mousemove',handleMouseMove);
+
+    //before the useEffect runs
+    return() =>{
+      window.removeEventListener('mousemove',handleMouseMove);
+    }
+  },[count]);
 
  const  incrementCount = () => { 
   // setIncrementCount(count+1);
@@ -27,8 +38,24 @@ const toggleLight = () =>{
   setIsOn(prevIsOn => !prevIsOn )
 }
 
+const handleMouseMove = event =>{
+  setMousePosition({
+    x:event.pageX,
+    y:event.pageY
+  })
+}
+
+
   return (
-    <React.Fragment >
+    <div   style={{
+      // height:'500px',
+      width:'500px',
+      background: "greenYellow",
+      textAlign:'center',
+      margin:'20px auto',
+      padding:'20px',
+ 
+  }} >
       <h1>Function & Hooks!</h1>
       <h3>Counter</h3>
       <button onClick={incrementCount}> I was clicked {count} times</button>
@@ -47,14 +74,20 @@ const toggleLight = () =>{
       style={{
           height:'50px',
           width:'50px',
-          background: isOn ? "yellow" :"grey",
-          borderRadius:'50%'
-          
+          background: isOn ? "red" :"grey",
+          borderRadius:'50%',
+          margin:'auto'
       }}
       // alt="FlashLight"
       onClick={toggleLight}/>
 
-    </React.Fragment>
+      <h3>Mouse Position!</h3>
+      {JSON.stringify( mousePosition , null, 2)}
+      <br/>
+
+
+    </div>
+
   );
 }
 
