@@ -17,6 +17,7 @@ export default function TodoList() {
             className="flex items-center bg-orange-dark border-black border-dashed border-2 my-2 py-4"
           >
             <span
+            onDoubleClick={()=> dispatch({ type: "TOGGLE_TODO", payload: todo})}
               className={`flex-1 ml-12 cursor-pointer ${todo.complete &&
                 "line-through text-red"}`}
                 style={{color:'green'}}
@@ -31,7 +32,8 @@ export default function TodoList() {
                 className="h-6"
               />
             </button>
-            <button>
+            <button
+            onClick={()=> dispatch({ type: "REMOVE_TODO", payload: todo})}>
               <img
               style={{color:'red'}}
                 src="https://icon.now.sh/delete/8b0000"

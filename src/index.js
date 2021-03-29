@@ -30,13 +30,15 @@ const App = () =>{
 ReactDOM.render(
   /** for abouve //ed example */
   // <UserContext.Provider value={userName}>
+
+  // <AppClass />
+  // <AppFunc/>
+  // <Register/>
+  // <Login/>
+  // <FetchData/>
+  // <Todo/>
 <React.Fragment>
-    <AppClass />
-    <AppFunc/>
-    <Register/>
-    <Login/>
-    <FetchData/>
-    <Todo/>
+
     <App/>
     </React.Fragment>,
   document.getElementById('root')
