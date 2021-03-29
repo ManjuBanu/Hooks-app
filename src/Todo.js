@@ -41,11 +41,43 @@ export default function Todo(){
         /** [new way]  */
         // <div>Hello !!! {value}</div>
 
-        <div>
-        count:{state.count}
-        <button className="border p-1" onClick={() => dispatch({type:"increment"})}>Incremetn</button>
-        <button className="border p-1" onClick={() => dispatch({type:"decrement"})}>Decremetn</button>
-        <button className="border p-1" onClick={() => dispatch({type:"reset"})}>Reset</button>
+        <div 
+        style={{
+            // height:'500px',
+            width:'500px',
+            background: "gray",
+            textAlign:'center',
+            margin:'auto',
+            padding:'20px'
+        }}>
+        <h1>count:{state.count}</h1>
+        <button 
+        style={{
+            height:'30px',
+            width:'100px',
+            background: "green",
+            textAlign:'center',
+            margin:'30px'
+        }}
+        className="border p-1" onClick={() => dispatch({type:"increment"})}>Increment</button>
+        <button 
+        style={{
+            height:'30px',
+            width:'100px',
+            background: "yellow",
+            textAlign:'center',
+            margin:'30px'
+        }}
+        className="border p-1" onClick={() => dispatch({type:"decrement"})}>Decrement</button>
+        <button 
+        style={{
+            height:'30px',
+            width:'100px',
+            background: "red",
+            textAlign:'center',
+            margin:'30px'
+        }}
+        className="border p-1" onClick={() => dispatch({type:"reset"})}>Reset</button>
         </div>
     )
 }

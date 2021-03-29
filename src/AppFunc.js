@@ -92,7 +92,9 @@ const handleGeoLocation = event => {
       padding:'20px',
  
   }} >
-      <h1>Function & Hooks!</h1>
+      <h1 style={{
+        color:'red',
+     }}>Function & Hooks!</h1>
       <h3>Counter</h3>
       <button onClick={incrementCount}> I was clicked {count} times</button>
 

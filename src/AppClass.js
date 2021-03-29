@@ -92,7 +92,9 @@ class AppClass extends React.Component{
                 margin:'auto',
                 padding:'20px'
             }}>
-                <h1>Class!</h1>
+                <h1  style={{
+                   color:'red',
+                }}>Class!</h1>
              
                 <h3>Counter</h3>
                     <button onClick={this.incrementCount}>

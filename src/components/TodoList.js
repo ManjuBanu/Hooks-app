@@ -24,9 +24,10 @@ export default function TodoList() {
             >
               {todo.text}
             </span>
-            <button>
+            <button
+            onClick={()=> dispatch({ type: "SET_CURRENT_TODO", payload: todo})}>
               <img
-              style={{color:'orange'}}
+              style={{color:'orange', marginRight:'10px'}}
                 src="https://icon.now.sh/edit/0050c5"
                 alt="Edit"
                 className="h-6"
@@ -35,7 +36,7 @@ export default function TodoList() {
             <button
             onClick={()=> dispatch({ type: "REMOVE_TODO", payload: todo})}>
               <img
-              style={{color:'red'}}
+              style={{color:'red', marginRight:'10px'}}
                 src="https://icon.now.sh/delete/8b0000"
                 alt="Delete"
                 className="h-6"

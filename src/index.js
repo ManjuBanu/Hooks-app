@@ -23,8 +23,18 @@ const App = () =>{
 
   return(
     <TodosContext.Provider value={{state,dispatch}}>
+    <div style={{
+      // height:'500px',
+      width:'500px',
+      background: "skyblue",
+      textAlign:'center',
+      margin:'50px auto',
+      padding:'20px'
+  }}
+  >
     <TodoForm/>
     <TodoList/>
+    </div>
     </TodosContext.Provider>
   )
 }
@@ -33,14 +43,13 @@ ReactDOM.render(
   /** for abouve //ed example */
   // <UserContext.Provider value={userName}>
 
-  // <AppClass />
-  // <AppFunc/>
-  // <Register/>
-  // <Login/>
-  // <FetchData/>
-  // <Todo/>
 <React.Fragment>
-
+<AppClass />
+<AppFunc/>
+<Register/>
+<Login/>
+<FetchData/>
+<Todo/>
     <App/>
     </React.Fragment>,
   document.getElementById('root')

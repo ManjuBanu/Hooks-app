@@ -17,11 +17,23 @@ export default function Login(){
         setUsername("");
         setPassword("");
     }
+    const styledInput = {
+        height:'40px',
+        width:'150px',
+        background: "white",
+        textAlign:'center',
+        margin:'10px auto',
+        padding:'20px'
+    };
 
 return(
     <div 
     style={{
-        textAlign:'center'
+        width:'500px',
+        background: "lightblue",
+        textAlign:'center',
+        margin:'50px auto',
+        padding:'20px'
     }}>
     <h2>Login</h2>
    <form
@@ -35,12 +47,14 @@ return(
     > 
 
     <input 
+    style={styledInput}
     value={username}
     type="text"
     placeholder="username"
     onChange={event => setUsername(event.target.value)}
     />
     <input 
+    style={styledInput}
     value={password}
     type="password"
     placeholder="password"
